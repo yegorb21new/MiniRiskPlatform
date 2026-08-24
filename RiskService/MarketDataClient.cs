@@ -18,7 +18,19 @@ namespace RiskService
             var encodedParams = Uri.EscapeDataString(joinedParams);
             var url = $"/prices?symbols={encodedParams}";
 
-            return await _httpClient.GetFromJsonAsync<List<PriceQuote>>(url);
+            try
+            {
+                var data = await _httpClient.GetFromJsonAsync<List<PriceQuote>>(url)
+                    ?? throw new MarketDataUnavailableException("Market data service could not provide prices.");
+
+                return data;
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new MarketDataUnavailableException("Market data service could not provide prices.", ex);
+            }
         }
     }
 }
+
+

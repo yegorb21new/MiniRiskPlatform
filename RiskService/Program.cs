@@ -19,8 +19,12 @@ builder.Services.AddHttpClient<MarketDataClient>(client =>
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 builder.Services.AddScoped<RiskCalculationService>();
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<MarketDataExceptionHandler>();
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
