@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using RiskService;
+using RiskService.ExceptionHandlers;
 using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,10 +18,12 @@ builder.Services.AddHttpClient<MarketDataClient>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5101");
     client.DefaultRequestHeaders.Add("Accept", "application/json");
+    client.Timeout = TimeSpan.FromSeconds(3);
 });
 builder.Services.AddScoped<RiskCalculationService>();
 builder.Services.AddProblemDetails();
-builder.Services.AddExceptionHandler<MarketDataExceptionHandler>();
+builder.Services.AddExceptionHandler<MarketDataTimeoutHandler>();
+builder.Services.AddExceptionHandler<MarketDataUnavailableHandler>();
 
 var app = builder.Build();
 
