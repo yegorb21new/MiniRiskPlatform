@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketDataService", "MarketDataService\MarketDataService.csproj", "{B80107EE-DB82-4B6A-9861-B7875A998213}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskService", "RiskService\RiskService.csproj", "{9232FBFE-6F35-4C75-9D9F-ADE56A9E3636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskService.Tests", "RiskService.Tests\RiskService.Tests.csproj", "{8288538C-92F0-4552-BCB7-682FB07D8D26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9232FBFE-6F35-4C75-9D9F-ADE56A9E3636}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9232FBFE-6F35-4C75-9D9F-ADE56A9E3636}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9232FBFE-6F35-4C75-9D9F-ADE56A9E3636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8288538C-92F0-4552-BCB7-682FB07D8D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8288538C-92F0-4552-BCB7-682FB07D8D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8288538C-92F0-4552-BCB7-682FB07D8D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8288538C-92F0-4552-BCB7-682FB07D8D26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
