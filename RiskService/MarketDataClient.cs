@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Net.Http.Json;
+using RiskService.Exceptions;
 
 namespace RiskService
 {
@@ -24,6 +25,10 @@ namespace RiskService
                     ?? throw new MarketDataUnavailableException("Market data service could not provide prices.");
 
                 return data;
+            }
+            catch (OperationCanceledException ex) when (ex.InnerException is TimeoutException)
+            {
+                throw new MarketDataTimeoutException("Request to Market Data Service timed out.", ex);
             }
             catch (HttpRequestException ex)
             {

@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using RiskService.Exceptions;
 
-namespace RiskService
+namespace RiskService.ExceptionHandlers
 {
-    public class MarketDataExceptionHandler : IExceptionHandler
+    public class MarketDataUnavailableHandler : IExceptionHandler
     {
-        private readonly ILogger<MarketDataExceptionHandler> _logger;
+        private readonly ILogger<MarketDataUnavailableHandler> _logger;
 
-        public MarketDataExceptionHandler(ILogger<MarketDataExceptionHandler> logger)
+        public MarketDataUnavailableHandler(ILogger<MarketDataUnavailableHandler> logger)
         {
             _logger = logger;
         }

@@ -27,7 +27,7 @@ var prices = new Dictionary<string, PriceQuote>(
     // TSLA intentionally omitted
 };
 
-app.MapGet("/prices", (string? symbols) =>
+app.MapGet("/prices", async (string? symbols) =>
 {
     if (string.IsNullOrWhiteSpace(symbols))
         return Results.Ok(prices.Values);
@@ -38,6 +38,8 @@ app.MapGet("/prices", (string? symbols) =>
 
     var result = prices.Values
         .Where(price => requestedSymbols.Contains(price.Symbol));
+
+    await Task.Delay(4000);
 
     return Results.Ok(result);
 });
