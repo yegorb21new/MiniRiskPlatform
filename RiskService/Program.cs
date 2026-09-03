@@ -1,4 +1,6 @@
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Http.Resilience;
+using Polly;
 using RiskService;
 using RiskService.ExceptionHandlers;
 using System.Data;
@@ -18,7 +20,21 @@ builder.Services.AddHttpClient<MarketDataClient>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5101");
     client.DefaultRequestHeaders.Add("Accept", "application/json");
-    client.Timeout = TimeSpan.FromSeconds(3);
+})
+.AddResilienceHandler("MiniRisk", pipeline =>
+{
+    pipeline.AddRetry(new HttpRetryStrategyOptions
+    {
+        MaxRetryAttempts = 3,
+        BackoffType = DelayBackoffType.Exponential,
+        UseJitter = true,
+        Delay = TimeSpan.FromMilliseconds(500)
+    });
+
+    pipeline.AddTimeout(new HttpTimeoutStrategyOptions
+    {
+        Timeout = TimeSpan.FromSeconds(3)
+    });
 });
 builder.Services.AddScoped<RiskCalculationService>();
 builder.Services.AddProblemDetails();
