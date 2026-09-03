@@ -26,13 +26,13 @@ namespace RiskService
 
                 return data;
             }
-            catch (OperationCanceledException ex) when (ex.InnerException is TimeoutException)
+            catch (Polly.Timeout.TimeoutRejectedException ex)
             {
                 throw new MarketDataTimeoutException("Request to Market Data Service timed out.", ex);
             }
             catch (HttpRequestException ex)
             {
-                throw new MarketDataUnavailableException("Market data service could not provide prices.", ex);
+                throw new MarketDataUnavailableException("Market Data Service could not provide prices.", ex);
             }
         }
     }
